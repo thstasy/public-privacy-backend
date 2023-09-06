@@ -8,7 +8,7 @@ import java.util.UUID;
 @Entity
 public class SubscriptionConfirmationToken {
 
-    @OneToOne(targetEntity = EmailEntity.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = EmailEntity.class, fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(nullable = false, name = "id")
     private EmailEntity emailEntity;
 
