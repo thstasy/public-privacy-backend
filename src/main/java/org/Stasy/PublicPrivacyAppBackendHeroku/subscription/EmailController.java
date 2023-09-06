@@ -68,8 +68,10 @@ public class EmailController {
             EmailEntity emailEntity = emailRepository.findByEmailIgnoreCase(token.getEmailEntity().getEmail());
             emailEntity.setEnabled(true);
             emailRepository.save(emailEntity);
-            String homepageLink = "<a href=\"" + homepage + "\">Homepage</a>";
-            String message = "Email verified successfully! Head to " + homepageLink + ".";
+//            String homepageLink = "<a href=\"" + homepage + "\">Homepage</a>";
+//            String message = "Email verified successfully! Head to " + homepageLink + ".";
+            String message = "Email verified successfully!";
+
             return ResponseEntity.ok(message);
         }
         return ResponseEntity.badRequest().body("Error: Couldn't verify email. Please try again with the address.");
