@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class EmailController {
-
-
-    @Value("${app.Domain}")
+    @Value("${app.homepage}")
     private String homepage;
 
     @Autowired
