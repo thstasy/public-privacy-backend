@@ -19,7 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOriginPatterns("https://public-privacy.xyz")
                 .allowCredentials(true)
                 .allowedMethods("GET", "POST", "DELETE", "PUT")
-                .allowedHeaders("Origin", "Content-Type", "Accept", "Authorization", "Cookie", "dashboardtoken", "logintoken");
+                .allowedHeaders("Origin", "Content-Type", "Accept");
 
 
         registry.addMapping("/collaborator/resetPassword1")
