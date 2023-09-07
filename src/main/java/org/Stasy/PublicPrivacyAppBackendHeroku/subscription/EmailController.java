@@ -48,8 +48,10 @@ public class EmailController {
             //make sure it really saves  the confirmation data here.
 
             SimpleMailMessage mailMessage = new SimpleMailMessage();
+            emailRepository.saveAndEnable(emailEntity);
+
 //            emailEntity.setEnabled(true);
-            emailRepository.save(emailEntity);
+//            emailRepository.save(emailEntity);
 
             mailMessage.setTo(emailEntity.getEmail());
             mailMessage.setSubject("Subscription Confirmation");

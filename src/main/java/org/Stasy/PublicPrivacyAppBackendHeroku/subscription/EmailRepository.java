@@ -7,4 +7,9 @@ public interface EmailRepository extends JpaRepository<EmailEntity, Long> {
     boolean existsByEmail(String email);
 
     EmailEntity findByEmailIgnoreCase(String email);
+
+    default EmailEntity saveAndEnable(EmailEntity emailEntity) {
+        emailEntity.setEnabled(true); // Set enabled to true
+        return save(emailEntity);
+    }
 }
