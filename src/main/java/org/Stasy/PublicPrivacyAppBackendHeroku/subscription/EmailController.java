@@ -21,13 +21,13 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
-    @Autowired
-    private SubscriptionConfirmationTokenRepository subscriptionConfirmationTokenRepository;
+//    @Autowired
+//    private SubscriptionConfirmationTokenRepository subscriptionConfirmationTokenRepository;
 
-    public EmailController(EmailRepository emailRepository, EmailService emailService, SubscriptionConfirmationTokenRepository subscriptionConfirmationTokenRepository) {
+    public EmailController(EmailRepository emailRepository, EmailService emailService) {
         this.emailRepository = emailRepository;
         this.emailService = emailService;
-        this.subscriptionConfirmationTokenRepository = subscriptionConfirmationTokenRepository;
+//        this.subscriptionConfirmationTokenRepository = subscriptionConfirmationTokenRepository;
     }
 
     @PostMapping("/subscribe")
@@ -43,17 +43,21 @@ public class EmailController {
 
         try {
             // Send verification token
-            SubscriptionConfirmationToken subscriptionConfirmationToken = new SubscriptionConfirmationToken(emailEntity);
-            subscriptionConfirmationTokenRepository.save(subscriptionConfirmationToken);//make sure it really saves  the confirmation data here.
+            // SubscriptionConfirmationToken subscriptionConfirmationToken = new SubscriptionConfirmationToken(emailEntity);
+            // subscriptionConfirmationTokenRepository.save(subscriptionConfirmationToken);
+            //make sure it really saves  the confirmation data here.
 
             SimpleMailMessage mailMessage = new SimpleMailMessage();
+//            emailEntity.setEnabled(true);
+            emailRepository.save(emailEntity);
+
             mailMessage.setTo(emailEntity.getEmail());
             mailMessage.setSubject("Subscription Confirmation");
 
             mailMessage.setText("This is to confirm that your email has been registered on subscription list! :)");
 
-//            mailMessage.setText("To confirm your subscription, please click here: "
-//                    + homepage + "confirm-subscription?token=" + subscriptionConfirmationToken.getConfirmationToken());
+//          mailMessage.setText("To confirm your subscription, please click here: "
+//          + homepage + "confirm-subscription?token=" + subscriptionConfirmationToken.getConfirmationToken());
             emailService.sendEmail(mailMessage);
 
             return ResponseEntity.status(HttpStatus.CREATED).build(); // 201
